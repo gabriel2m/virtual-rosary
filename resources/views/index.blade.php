@@ -10,10 +10,17 @@
     @vite('resources/css/app.css')
 </head>
 
-<body class="flex justify-center bg-sky-300/80 text-slate-800 p-5" x-data="{ beads: 0, current: 1 }">
+<body 
+    class="flex justify-center bg-sky-300/80 text-slate-800" 
+    x-data="{ 
+        beads: 0, 
+        current: localStorage.getItem('current') ?? 1
+    }"
+    x-init="$watch('current', current => localStorage.setItem('current', current == beads ? 1 : current))"
+>
     <x-btn-previous></x-btn-previous>
 
-    <div class="flex items-center flex-col gap-1.5">
+    <div class="flex items-center flex-col gap-1.5 p-5">
 
         <x-apostles-creed></x-apostles-creed>
 
