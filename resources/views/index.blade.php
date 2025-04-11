@@ -10,7 +10,29 @@
     @vite('resources/css/app.css')
 </head>
 
-<body>
+<body class="flex justify-center bg-sky-300/80 text-slate-800 p-5" x-data="{ beads: 0, current: 1 }">
+    <x-btn-previous></x-btn-previous>
+
+    <div class="flex items-center flex-col gap-1.5">
+
+        <x-apostles-creed></x-apostles-creed>
+
+        <x-our-father></x-our-father>
+
+        <x-hail-mary></x-hail-mary>
+        <x-hail-mary></x-hail-mary>
+        <x-hail-mary></x-hail-mary>
+
+        @foreach (range(1, 5) as $i)
+            <x-our-father></x-our-father>
+            @foreach (range(1, 10) as $n)
+                <x-hail-mary></x-hail-mary>
+            @endforeach
+        @endforeach
+    </div>
+
+    <x-btn-next></x-btn-next>
+
     @vite('resources/js/app.js')
 </body>
 
