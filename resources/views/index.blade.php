@@ -23,7 +23,7 @@
 </head>
 
 <body
-    class="flex justify-center bg-teal-300/70 text-slate-800"
+    class="bg-teal-300/70 text-slate-800"
     x-data="{
         beads: 0,
         current: parseInt(localStorage.getItem('current') ?? 1),
@@ -40,29 +40,42 @@
     x-on:keyup.right="next()"
     x-on:keyup.up="previous()"
 >
-    <x-btn-previous></x-btn-previous>
+    <div class="flex justify-center">
+        <x-btn-previous></x-btn-previous>
 
-    <div class="flex flex-col items-center gap-1.5 p-5">
+        <div class="flex flex-col items-center gap-1.5 p-5">
 
-        <x-apostles-creed></x-apostles-creed>
+            <x-apostles-creed></x-apostles-creed>
 
-        <x-our-father></x-our-father>
-
-        <x-hail-mary></x-hail-mary>
-        <x-hail-mary></x-hail-mary>
-        <x-hail-mary></x-hail-mary>
-
-        @foreach (range(1, 5) as $i)
             <x-our-father></x-our-father>
-            @foreach (range(1, 10) as $n)
-                <x-hail-mary></x-hail-mary>
+
+            <x-hail-mary></x-hail-mary>
+            <x-hail-mary></x-hail-mary>
+            <x-hail-mary></x-hail-mary>
+
+            @foreach (range(1, 5) as $i)
+                <x-our-father></x-our-father>
+                @foreach (range(1, 10) as $n)
+                    <x-hail-mary></x-hail-mary>
+                @endforeach
             @endforeach
-        @endforeach
+        </div>
+
+        <x-btn-next></x-btn-next>
+
+        @vite('resources/js/app.js')
     </div>
 
-    <x-btn-next></x-btn-next>
-
-    @vite('resources/js/app.js')
+    <div class="flex justify-end px-5 py-2">
+        <a
+            class="underline"
+            href="https://www.linkedin.com/in/gabriel2m"
+            rel="noopener noreferrer"
+            target="_blank"
+        >
+            @gabriel2m
+        </a>
+    </div>
 </body>
 
 </html>
