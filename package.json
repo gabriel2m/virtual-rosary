@@ -23,6 +23,6 @@
     },
     "lint-staged": {
         "*.php": "./vendor/bin/pint",
-        "*.{js,blade.php}": "prettier -w"
+        "resources/**/*.{js,blade.php}": "prettier -w"
     }
 }
