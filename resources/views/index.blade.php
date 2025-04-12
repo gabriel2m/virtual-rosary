@@ -17,7 +17,7 @@
 </head>
 
 <body
-    class="flex justify-center bg-sky-300/80 text-slate-800"
+    class="flex justify-center bg-teal-300/70 text-slate-800"
     x-data="{
         beads: 0,
         current: parseInt(localStorage.getItem('current') ?? 1)
