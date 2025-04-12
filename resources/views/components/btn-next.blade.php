@@ -1,11 +1,5 @@
 <x-change-btn
     side="right"
-    x-on:click="
-        if(current == beads) {
-            return;
-        }
-
-        current++;
-    "
+    x-on:click="current = Math.min(beads, current+1);"
 >
 </x-change-btn>

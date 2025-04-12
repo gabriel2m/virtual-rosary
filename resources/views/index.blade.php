@@ -20,7 +20,7 @@
     class="flex justify-center bg-sky-300/80 text-slate-800"
     x-data="{
         beads: 0,
-        current: localStorage.getItem('current') ?? 1
+        current: parseInt(localStorage.getItem('current') ?? 1)
     }"
     x-init="$watch('current', current => localStorage.setItem('current', current == beads ? 1 : current))"
 >
