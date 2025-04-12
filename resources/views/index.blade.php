@@ -62,8 +62,6 @@
         </div>
 
         <x-btn-next></x-btn-next>
-
-        @vite('resources/js/app.js')
     </div>
 
     <div class="flex justify-end px-5 py-2">
@@ -76,6 +74,8 @@
             @gabriel2m
         </a>
     </div>
+
+    @vite('resources/js/app.js')
 </body>
 
 </html>
