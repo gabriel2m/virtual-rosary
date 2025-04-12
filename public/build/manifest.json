@@ -60,9 +60,13 @@
     "src": "node_modules/line-awesome/dist/line-awesome/fonts/la-solid-900.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-BiyPn0WW.css",
+    "file": "assets/app-CMkp-ZW7.css",
     "src": "resources/css/app.css",
     "isEntry": true
+  },
+  "resources/images/logo.svg": {
+    "file": "assets/logo-CL_1h_Lw.svg",
+    "src": "resources/images/logo.svg"
   },
   "resources/js/app.js": {
     "file": "assets/app-Dg2XCL8l.js",

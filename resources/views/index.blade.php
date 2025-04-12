@@ -11,6 +11,12 @@
         name="viewport"
     >
 
+    <link
+        href="{{ Vite::asset('resources/images/logo.svg') }}"
+        rel="icon"
+        type="image/svg+xml"
+    />
+
     <title>{{ config('app.name') }}</title>
 
     @vite('resources/css/app.css')
