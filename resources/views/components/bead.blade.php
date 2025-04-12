@@ -1,5 +1,5 @@
 <i
-    {{ $attributes->class(['bead focus-visible:outline-0']) }}
+    {{ $attributes->class(['cursor-pointer']) }}
     x-bind:class="{ 'text-white': current == index }"
     x-data="{
         index: null,
@@ -19,4 +19,5 @@
             $watch('current', scroll);
         }
     }"
+    @click="current = index"
 ></i>
