@@ -1,4 +1,5 @@
 <i
+    @click="current = index"
     {{ $attributes->class(['cursor-pointer']) }}
     x-bind:class="{ 'text-white': current == index }"
     x-data="{
@@ -19,5 +20,4 @@
             $watch('current', scroll);
         }
     }"
-    @click="current = index"
 ></i>
