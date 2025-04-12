@@ -20,9 +20,19 @@
     class="flex justify-center bg-teal-300/70 text-slate-800"
     x-data="{
         beads: 0,
-        current: parseInt(localStorage.getItem('current') ?? 1)
+        current: parseInt(localStorage.getItem('current') ?? 1),
+        next() {
+            this.current = Math.min(this.beads, this.current + 1);
+        },
+        previous() {
+            this.current = Math.max(1, this.current - 1);
+        }
     }"
     x-init="$watch('current', current => localStorage.setItem('current', current == beads ? 1 : current))"
+    x-on:keyup.down="next()"
+    x-on:keyup.left="previous()"
+    x-on:keyup.right="next()"
+    x-on:keyup.up="previous()"
 >
     <x-btn-previous></x-btn-previous>
 
