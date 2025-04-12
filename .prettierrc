@@ -1,0 +1,19 @@
+{
+    "plugins": [
+        "@shufo/prettier-plugin-blade"
+    ],
+    "overrides": [
+        {
+            "files": [
+                "*.blade.php"
+            ],
+            "options": {
+                "parser": "blade"
+            }
+        }
+    ],
+    "sortTailwindcssClasses": true,
+    "sortHtmlAttributes": "alphabetical",
+    "wrapAttributes": "force-expand-multiline",
+    "singleQuote": true
+}

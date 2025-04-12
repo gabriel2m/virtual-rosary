@@ -1,17 +1,22 @@
-<i {{ $attributes->class(['bead focus-visible:outline-0']) }} x-data="{ index: null }" 
-    x-init="
-        index = ++beads;
-
-        let scroll = current => {
-            if(current != index) {
-                return;
-            }
-
-            $el.scrollIntoView({ block: 'center' })
-        };
-
-        scroll(current);
-
-        $watch('current', scroll);
-    "
-    X-bind:class="{ 'text-white': current == index }"></i>
+<i
+    {{ $attributes->class(['bead focus-visible:outline-0']) }}
+    x-bind:class="{ 'text-white': current == index }"
+    x-data="{
+        index: null,
+        init() {
+            this.index = ++beads;
+    
+            let scroll = current => {
+                if (current != this.index) {
+                    return;
+                }
+    
+                $el.scrollIntoView({ block: 'center' })
+            };
+    
+            scroll(current);
+    
+            $watch('current', scroll);
+        }
+    }"
+></i>
