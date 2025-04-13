@@ -24,11 +24,11 @@
         property="og:title"
     />
     <meta
-        content="{{ __('Minimalistic Marian rosary.') }}"
+        content="{{ __('Pray the rosary from anywhere') }}"
         property="og:description"
     />
     <meta
-        content="{{ Vite::asset('resources/images/logo.svg') }}"
+        content="{{ Vite::asset('resources/images/og-image.png') }}"
         property="og:image"
     />
     <meta

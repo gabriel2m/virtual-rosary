@@ -68,6 +68,10 @@
     "file": "assets/logo-CL_1h_Lw.svg",
     "src": "resources/images/logo.svg"
   },
+  "resources/images/og-image.png": {
+    "file": "assets/og-image-sXIH--Jg.png",
+    "src": "resources/images/og-image.png"
+  },
   "resources/js/app.js": {
     "file": "assets/app-CJtpRYaa.js",
     "name": "app",
