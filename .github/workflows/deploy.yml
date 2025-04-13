@@ -20,7 +20,7 @@ jobs:
 
       - name: Deploy Application
         run: |
-          ssh -o StrictHostKeyChecking=no -i <(echo "${{ secrets.SSH_PRIVATE_KEY }}") -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          echo ${{ secrets.SSH_PRIVATE_KEY }} | ssh -o StrictHostKeyChecking=no -i /dev/stdin -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
             cd ${{ secrets.APP_PATH }}
             git pull
             php composer install --no-dev --optimize-autoloader
