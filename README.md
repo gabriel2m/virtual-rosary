@@ -1,14 +1,20 @@
-<p align="center"><a href="http://tercovirtual.gabriel2m.com" target="_blank"><img src="https://raw.githubusercontent.com/gabriel2m/rosary/17586629610a679eaa9456d995890569c446ce68/resources/images/logo.svg" width="400" alt="Logo"></a></p>
+<p align="center">
+    <a href="http://tercovirtual.gabriel2m.com" target="_blank">
+        <img src="https://raw.githubusercontent.com/gabriel2m/rosary/17586629610a679eaa9456d995890569c446ce68/resources/images/logo.svg" width="400" alt="Logo">
+    </a>
+</p>
 
 ## About
 
-Minimalistic Marian rosary app.
+Minimalistic Marian rosary web app.
 
 ## Next steps
 
+- Option to choose between five and twenty decades
 - Improve SEO
 - Make it a PWA
-- Add rooms to allow the rosary to be shared
+- Internationalization
+- Add rooms to allow to share the rosary
 
 ## Contributing
 
