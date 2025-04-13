@@ -24,7 +24,7 @@
         property="og:title"
     />
     <meta
-        content="{{ __('Pray the rosary from anywhere') }}"
+        content="{{ __('Rosary always in hand') }}"
         property="og:description"
     />
     <meta
