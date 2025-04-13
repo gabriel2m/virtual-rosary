@@ -26,7 +26,10 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           APP_PATH: ${{ secrets.APP_PATH }}
         run: |
-          ssh -o StrictHostKeyChecking=no -i <(echo "$SSH_PRIVATE_KEY") -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" << 'EOF'
+          echo "$SSH_PRIVATE_KEY" > SSH_PRIVATE_KEY
+          chmod 600 SSH_PRIVATE_KEY
+
+          ssh -o StrictHostKeyChecking=no -i SSH_PRIVATE_KEY -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" << 'EOF'
             cd "$APP_PATH"
             git pull
             php composer install --no-dev --optimize-autoloader
