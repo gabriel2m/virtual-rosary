@@ -1,6 +1,6 @@
 <p align="center">
     <a href="http://tercovirtual.gabriel2m.com" target="_blank">
-        <img src="https://raw.githubusercontent.com/gabriel2m/rosary/17586629610a679eaa9456d995890569c446ce68/resources/images/logo.svg" width="400" alt="Logo">
+        <img src="https://github.com/gabriel2m/rosary/blob/master/resources/images/og-image.png?raw=true" width="300" alt="Logo">
     </a>
 </p>
 
