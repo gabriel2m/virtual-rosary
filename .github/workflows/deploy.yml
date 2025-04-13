@@ -19,9 +19,15 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Deploy Application
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          APP_PATH: ${{ secrets.APP_PATH }}
         run: |
-          echo ${{ secrets.SSH_PRIVATE_KEY }} | ssh -o StrictHostKeyChecking=no -i /dev/stdin -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-            cd ${{ secrets.APP_PATH }}
+          echo "$SSH_PRIVATE_KEY" | ssh -o StrictHostKeyChecking=no -i /dev/stdin -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" << 'EOF'
+            cd "$APP_PATH"
             git pull
             php composer install --no-dev --optimize-autoloader
             php artisan optimize
