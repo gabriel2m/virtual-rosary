@@ -1,6 +1,5 @@
 <i
-    @click="current = index"
-    {{ $attributes->class(['cursor-pointer']) }}
+    {{ $attributes }}
     x-bind:class="{ 'text-white': current == index }"
     x-data="{
         index: null,
