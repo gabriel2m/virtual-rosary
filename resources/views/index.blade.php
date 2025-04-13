@@ -19,6 +19,27 @@
 
     <title>{{ config('app.name') }}</title>
 
+    <meta
+        content="{{ config('app.name') }}"
+        property="og:title"
+    />
+    <meta
+        content="{{ __('Minimalistic Marian rosary.') }}"
+        property="og:description"
+    />
+    <meta
+        content="{{ Vite::asset('resources/images/logo.svg') }}"
+        property="og:image"
+    />
+    <meta
+        content="{{ config('app.url') }}"
+        property="og:url"
+    />
+    <meta
+        content="website"
+        property="og:type"
+    />
+
     @vite('resources/css/app.css')
 </head>
 
