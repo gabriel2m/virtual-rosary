@@ -65,7 +65,7 @@
         }
     }"
     x-effect.beads="localStorage.setItem('beads', beads)"
-    x-init="$watch('current', current => localStorage.setItem('current', current == beads ? 1 : current))"
+    x-effect.current="localStorage.setItem('current', current == beads ? 1 : current)"
     x-on:keyup.down="next()"
     x-on:keyup.left="previous()"
     x-on:keyup.right="next()"
