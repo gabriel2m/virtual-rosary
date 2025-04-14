@@ -89,7 +89,7 @@
     <div class="flex justify-center">
         <x-btn-previous></x-btn-previous>
 
-        <div class="flex flex-col items-center gap-1.5 p-5">
+        <div class="mb-3 mt-12 flex flex-col items-center gap-1.5">
             <x-apostles-creed></x-apostles-creed>
 
             <x-our-father></x-our-father>
