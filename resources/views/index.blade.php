@@ -45,7 +45,7 @@
 
 <body
     {{-- Display screen only after Alpine initialized --}}
-    class="hidden bg-teal-300/70 text-slate-800"
+    class="hidden bg-teal-300/80 text-slate-800"
     x-bind:class="{ 'hidden': false }"
     x-data="{
         beads: parseInt(localStorage.getItem('beads') ?? 60),
