@@ -24,7 +24,7 @@
         property="og:title"
     />
     <meta
-        content="{{ __('Rosary always in hand') }}"
+        content="@lang('Rosary always in hand')"
         property="og:description"
     />
     <meta
@@ -90,7 +90,6 @@
         <x-btn-previous></x-btn-previous>
 
         <div class="flex flex-col items-center gap-1.5 p-5">
-
             <x-apostles-creed></x-apostles-creed>
 
             <x-our-father></x-our-father>
