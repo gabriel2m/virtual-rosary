@@ -4,30 +4,30 @@
     </a>
 </p>
 
-## About ✨
+## 💡 About
 
 Minimalistic Marian rosary web app. 📿
 
-### Features 🌟
+## 🛠️ Features
 
-- 📿 Easy-to-use interface
+- 🖌️ Easy-to-use interface
 - 💾 Saves your progress to continue later
 - 🌐 Accessible from any device
 
 Rosary always in hand. 🙏
 
-## Next steps 🚀
+## 🚀 Next steps
 
 - 🔀 Option to choose between five and twenty decades
 - 📈 Improve SEO
 - 📱 Make it a PWA
 - 🌍 Internationalization
-- 🤝 Add rooms to allow to share the rosary
+- 🔗 Add rooms to allow sharing the rosary
 
-## Contributing 🤗
+## 🤝 Contributing
 
 Thank you for considering contributing! Just submit a PR and I'll review it as soon as possible. 💻
 
-## License 📜
+## 📜 License
 
 Open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
