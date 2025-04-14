@@ -11,6 +11,7 @@ Minimalistic Marian rosary web app. 📿
 ## 🛠️ Features
 
 - 🖌️ Easy-to-use interface
+- 🔀 Choose between five and twenty decades
 - 💾 Saves your progress to continue later
 - 🌐 Accessible from any device
 
@@ -18,7 +19,6 @@ Rosary always in hand. 🙏
 
 ## 🚀 Next steps
 
-- 🔀 Option to choose between five and twenty decades
 - 📈 Improve SEO
 - 📱 Make it a PWA
 - 🌍 Internationalization

@@ -4,7 +4,7 @@
     x-data="{
         index: null,
         init() {
-            this.index = ++beads;
+            this.index = ++count;
     
             let scroll = current => {
                 if (current != this.index) {
@@ -19,4 +19,5 @@
             $watch('current', scroll);
         }
     }"
+    x-show="beads >= index"
 ></i>
