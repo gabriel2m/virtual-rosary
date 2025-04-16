@@ -66,10 +66,10 @@
     }"
     x-effect.beads="localStorage.setItem('beads', beads)"
     x-effect.current="localStorage.setItem('current', current == beads ? 1 : current)"
-    x-on:keyup.down="next()"
-    x-on:keyup.left="previous()"
-    x-on:keyup.right="next()"
-    x-on:keyup.up="previous()"
+    x-on:keydown.arrow-down.prevent="next()"
+    x-on:keydown.arrow-left="previous()"
+    x-on:keydown.arrow-right="next()"
+    x-on:keydown.arrow-up.prevent="previous()"
 >
     <div class="absolute flex w-full p-3">
         <div
