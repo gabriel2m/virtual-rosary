@@ -77,10 +77,11 @@
             x-on:click="toggleBeads()"
         >
             @lang('5 decades')
-            <div
-                class="relative h-6 w-11 rounded-full border after:absolute after:bottom-0 after:left-[0.0625rem] after:top-0 after:my-auto after:h-5 after:w-5 after:rounded-full after:bg-slate-800 after:transition-all after:content-['']"
-                x-bind:class="beads == 225 && 'after:translate-x-5'"
-            >
+            <div class="w-11 rounded-full p-0.5 outline">
+                <div
+                    class="size-5 rounded-full bg-slate-700 transition-all"
+                    x-bind:class="beads == 225 && 'ml-5'"
+                ></div>
             </div>
             @lang('20 decades')
         </div>
