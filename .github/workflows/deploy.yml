@@ -10,7 +10,7 @@ jobs:
   deploy:
     name: Deploy via SSH
     runs-on: ubuntu-latest
-    environment: 
+    environment:
       name: prod
       url: https://tercovirtual.gabriel2m.com
 
