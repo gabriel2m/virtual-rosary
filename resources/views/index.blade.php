@@ -71,20 +71,31 @@
     x-on:keydown.arrow-right="next()"
     x-on:keydown.arrow-up.prevent="previous()"
 >
-    <div class="absolute flex w-full p-3">
-        <div
-            class="ml-auto inline-flex cursor-pointer items-center gap-3 text-sm font-medium text-slate-700"
+    <div class="items-between absolute flex w-full flex-col p-3 text-sm font-medium">
+        <button
+            class="inline-flex w-min items-center gap-3"
+            type="button"
             x-on:click="toggleBeads()"
         >
             @lang('5 decades')
             <div class="w-11 rounded-full p-0.5 outline">
                 <div
-                    class="size-5 rounded-full bg-slate-700 transition-all"
+                    class="size-5 rounded-full bg-current transition-all"
                     x-bind:class="beads == 225 && 'ml-5'"
-                ></div>
+                >
+                </div>
             </div>
             @lang('20 decades')
-        </div>
+        </button>
+        <button
+            class="fixed right-3 flex items-center gap-1"
+            type="button"
+            x-on:click="current = 1"
+            x-show="current != 1"
+        >
+            @lang('Restart')
+            <i class="las la-redo-alt text-xl"></i>
+        </button>
     </div>
 
     <div class="flex justify-center">
