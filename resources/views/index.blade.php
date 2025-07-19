@@ -94,7 +94,7 @@
             x-show="current != 1"
         >
             @lang('Restart')
-            <i class="las la-redo-alt text-xl"></i>
+            <i class="las la-undo-alt text-xl"></i>
         </button>
     </div>
 
