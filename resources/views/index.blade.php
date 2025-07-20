@@ -2,6 +2,10 @@
 <html
     class="scroll-smooth"
     lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+    x-data="{
+        set: (key, value) => localStorage.setItem(key, JSON.stringify(value)),
+        get: (key, defaultValue = null) => JSON.parse(localStorage.getItem(key)) ?? defaultValue
+    }"
 >
 
 <head>
@@ -48,9 +52,9 @@
     class="hidden bg-teal-300/80 text-slate-800"
     x-bind:class="{ 'hidden': false }"
     x-data="{
-        beads: parseInt(localStorage.getItem('beads') ?? 60),
+        beads: get('beads', 60),
+        current: get('current', 1),
         count: 0,
-        current: parseInt(localStorage.getItem('current') ?? 1),
         toggleBeads() {
             this.beads = this.beads == 60 ? 225 : 60;
             if (this.current > this.beads) {
@@ -64,8 +68,8 @@
             this.current = Math.max(1, this.current - 1);
         }
     }"
-    x-effect.beads="localStorage.setItem('beads', beads)"
-    x-effect.current="localStorage.setItem('current', current == beads ? 1 : current)"
+    x-effect.beads="set('beads', beads)"
+    x-effect.current="set('current', current == beads ? 1 : current)"
     x-on:keydown.arrow-down.prevent="next()"
     x-on:keydown.arrow-left="previous()"
     x-on:keydown.arrow-right="next()"
