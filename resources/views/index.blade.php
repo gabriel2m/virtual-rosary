@@ -103,7 +103,7 @@
     </div>
 
     <div class="flex justify-center">
-        <x-btn-previous></x-btn-previous>
+        <x-button-previous></x-button-previous>
 
         <div class="mb-3 mt-12 flex flex-col items-center gap-1.5 px-1">
             <x-apostles-creed></x-apostles-creed>
@@ -122,7 +122,7 @@
             @endforeach
         </div>
 
-        <x-btn-next></x-btn-next>
+        <x-button-next></x-button-next>
     </div>
 
     <div class="flex justify-end px-5 py-2">
