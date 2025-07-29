@@ -1,7 +1,23 @@
-<i
+@props(['defaultIcon', 'activeIcon' => null])
+
+@php
+    $activeIcon ??= $defaultIcon;
+@endphp
+
+<div
     {{ $attributes->merge([
-        'x-bind:class' => 'current == index && `text-${theme.current} text-shadow-lg/25`',
-        'x-data' => '{ index: ++count }',
-        'x-effect' => 'current == index && $el.scrollIntoView({ block: "center" })',
+        'x-data' => '{ index: ++count, active: false }',
+        'x-effect.current' => 'active = current == index',
+        'x-effect.active' => 'active && $el.scrollIntoView({ block: "center" })',
         'x-show' => 'beads >= index',
-    ]) }}></i>
+    ]) }}>
+    <x-dynamic-component
+        :component="$defaultIcon"
+        x-show="!active"
+    />
+    <x-dynamic-component
+        :component="$activeIcon"
+        x-bind:class="`text-${theme.current} drop-shadow-md/20`"
+        x-show="active"
+    />
+</div>

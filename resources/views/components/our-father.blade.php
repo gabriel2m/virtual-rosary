@@ -1,1 +1,5 @@
-<x-bead {{ $attributes->class(['las la-dot-circle text-5xl']) }}></x-bead>
+<x-bead
+    activeIcon="mdi-record-circle"
+    class="size-12"
+    defaultIcon="mdi-record-circle-outline"
+/>

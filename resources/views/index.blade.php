@@ -98,13 +98,17 @@
                 @lang('20 decades')
             </button>
             <div class="w-px bg-current"></div>
-            <div x-data="{ open: false }">
+            <div
+                class="my-auto"
+                x-data="{ open: false }"
+            >
                 <button
+                    class="flex"
                     type="button"
                     x-on:click="open = !open"
                 >
                     @lang('Theme')
-                    <i class="las la-paint-roller text-xl"></i>
+                    <x-lineawesome-paint-roller-solid class="-mt-0.5 ml-0.5 size-5" />
                 </button>
                 <div
                     class="absolute right-0 z-20 flex w-screen md:right-auto md:w-auto"
@@ -115,8 +119,6 @@
                         class="bg-linear-to-br m-auto mt-1 flex size-min flex-col gap-3 rounded-md from-blue-950 to-white p-3 text-sm text-white shadow-lg"
                         x-data="{
                             selected: 'background',
-                            bases: ['red', 'amber', 'green', 'teal', 'sky', 'indigo', 'purple', 'pink', 'slate'],
-                            variants: [200, 300, 400, 500, 600, 700, 800, 900],
                             error: null
                         }"
                         x-on:click.away="open = false"
@@ -140,10 +142,12 @@
                             x-text="error"
                         ></p>
                         <div class="flex">
-                            <template x-for="base in bases">
+                            <template
+                                x-for="base in ['red', 'amber', 'green', 'teal', 'sky', 'indigo', 'purple', 'pink', 'slate']"
+                            >
                                 <div>
                                     <x-color-button x-data="{ color: 'white' }"></x-color-button>
-                                    <template x-for="variant in variants">
+                                    <template x-for="variant in [200, 300, 400, 500, 600, 700, 800, 900]">
                                         <x-color-button></x-color-button>
                                     </template>
                                 </div>
@@ -160,31 +164,33 @@
             x-show="current != 1"
         >
             @lang('Restart')
-            <i class="las la-undo-alt text-xl"></i>
+            <x-lineawesome-undo-alt-solid class="size-5" />
         </button>
     </div>
 
     <div class="flex justify-center">
-        <x-button-previous></x-button-previous>
+        <x-change-current-button type="previous" />
 
-        <div class="mb-3 mt-12 flex flex-col items-center gap-1.5 px-1">
-            <x-apostles-creed></x-apostles-creed>
+        <x-beads-container class="mb-3 mt-12">
+            <x-apostles-creed />
 
-            <x-our-father></x-our-father>
+            <x-our-father />
 
-            <x-hail-mary></x-hail-mary>
-            <x-hail-mary></x-hail-mary>
-            <x-hail-mary></x-hail-mary>
+            <template x-for="n in Array(3)">
+                <x-hail-mary />
+            </template>
 
-            @foreach (range(1, 20) as $i)
-                <x-our-father></x-our-father>
-                @foreach (range(1, 10) as $n)
-                    <x-hail-mary></x-hail-mary>
-                @endforeach
-            @endforeach
-        </div>
+            <template x-for="i in Array(20)">
+                <x-beads-container>
+                    <x-our-father />
+                    <template x-for="n in Array(10)">
+                        <x-hail-mary />
+                    </template>
+                </x-beads-container>
+            </template>
+        </x-beads-container>
 
-        <x-button-next></x-button-next>
+        <x-change-current-button type="next" />
     </div>
 
     <div class="flex justify-end px-5 py-2">

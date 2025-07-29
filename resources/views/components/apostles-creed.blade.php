@@ -1,1 +1,4 @@
-<x-bead {{ $attributes->class(['las la-cross text-8xl']) }}></x-bead>
+<x-bead
+    class="size-24"
+    defaultIcon="lineawesome-cross-solid"
+/>

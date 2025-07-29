@@ -1,1 +1,5 @@
-<x-bead {{ $attributes->class(['las la-circle text-4xl']) }}></x-bead>
+<x-bead
+    activeIcon="mdi-circle"
+    class="size-9"
+    defaultIcon="mdi-circle-outline"
+/>
