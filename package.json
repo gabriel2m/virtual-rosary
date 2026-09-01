@@ -1,26 +1,19 @@
 {
-    "private": true,
-    "type": "module",
-    "scripts": {
-        "build": "vite build",
-        "dev": "vite",
-        "format": "prettier resources/**/*.{js,blade.php} -w",
-        "prepare": "husky"
-    },
-    "devDependencies": {
-        "@shufo/prettier-plugin-blade": "^1.15.3",
-        "@tailwindcss/vite": "^4.0.0",
-        "alpinejs": "^3.14.9",
-        "concurrently": "^9.0.1",
-        "husky": "^9.1.7",
-        "laravel-vite-plugin": "^1.2.0",
-        "lint-staged": "^15.5.1",
-        "prettier": "^3.5.3",
-        "tailwindcss": "^4.0.0",
-        "vite": "^6.2.4"
-    },
-    "lint-staged": {
-        "*.php": "./vendor/bin/pint",
-        "resources/**/*.{js,blade.php}": "prettier -w"
-    }
+  "name": "rosary",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host=0.0.0.0",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/alpinejs": "^3.13.11",
+    "alpinejs": "^3.16.3",
+    "tailwindcss": "^4.3.3",
+    "typescript": "~6.0.2",
+    "vite": "^8.2.2"
+  }
 }

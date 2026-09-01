@@ -1,0 +1,10 @@
+services:
+  app:
+    image: node:26
+    working_dir: /usr/src/app
+    volumes:
+      - ".:/usr/src/app"
+    ports:
+      - 5173:5173
+    command: ['npm', 'run', 'dev']
+

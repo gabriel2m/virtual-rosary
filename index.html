@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="pt-BR" x-data="{
+    set: (key, value) => localStorage.setItem(key, JSON.stringify(value)),
+    get: (key, defaultValue = null) => JSON.parse(localStorage.getItem(key)) ?? defaultValue
+}">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Santo Terço</title>
+  <link href="/logo.svg" rel="icon" type="image/svg+xml" />
+  <link rel="stylesheet" href="/src/style.css">
+  <meta content="Santo Terço" property="og:title" />
+  <meta content="Terço sempre a mão" property="og:description" />
+  <meta content="/og.png" property="og:image" />
+  <meta content="https://gabriel2m.github.io/virtual-rosary" property="og:url" />
+  <meta content="website" property="og:type" />
+</head>
+
+<body x-bind:class="`bg-${theme.background} text-${theme.content}`" x-cloak x-data="{
+    beads: get('beads', 60),
+    theme: get('theme', {
+        background: 'sky-300',
+        content: 'slate-800',
+        current: 'white'
+    }),
+    current: get('current', 1),
+    count: 0,
+    toggleBeads() {
+        this.beads = this.beads == 60 ? 225 : 60;
+        if (this.current > this.beads) {
+            this.current = 1;
+        }
+    },
+    next() {
+        this.current = Math.min(this.beads, this.current + 1);
+    },
+    previous() {
+        this.current = Math.max(1, this.current - 1);
+    }
+}" x-effect.beads="set('beads', beads)" x-effect.current="set('current', current == beads ? 1 : current)"
+  x-effect.theme="set('theme', theme)" x-on:keydown.arrow-down.prevent="next()" x-on:keydown.arrow-left="previous()"
+  x-on:keydown.arrow-right="next()" x-on:keydown.arrow-up.prevent="previous()">
+  <div class="items-between absolute flex w-full flex-col p-3 text-sm font-medium">
+    <div class="flex gap-4">
+      <button class="flex items-center gap-3" type="button" x-on:click="toggleBeads()">
+        Terço
+        <div class="w-11 rounded-full p-0.5 outline">
+          <div class="size-5 rounded-full bg-current transition-all" x-bind:class="beads == 225 && 'ml-5'">
+          </div>
+        </div>
+        Rosário
+      </button>
+      <div class="w-px bg-current"></div>
+      <div class="my-auto" x-data="{ open: false }">
+        <button class="flex" type="button" x-on:click="open = !open">
+          Tema
+          <svg class="-mt-0.5 ml-0.5 size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor">
+            <path
+              d="M 5 4 L 5 12 L 23 12 L 23 4 Z M 7 6 L 21 6 L 21 10 L 7 10 Z M 24 7 L 24 9 L 25 9 L 25 13.25 L 15.71875 16.03125 L 15 16.25 L 15 19 L 13 19 L 13 28 L 19 28 L 19 19 L 17 19 L 17 17.75 L 26.28125 14.96875 L 27 14.75 L 27 7 Z M 15 21 L 17 21 L 17 26 L 15 26 Z" />
+          </svg>
+        </button>
+        <div class="absolute right-0 z-20 flex w-screen md:right-auto md:w-auto" x-show="open" x-transition>
+          <div
+            class="bg-linear-to-br m-auto mt-1 flex size-min flex-col gap-3 rounded-md from-blue-950 to-white p-3 text-sm text-white shadow-lg"
+            x-data="{
+                selected: 'background',
+                error: null
+            }" x-on:click.away="open = false">
+            <ul class="flex w-full justify-between px-5">
+              <li>
+                <button class="w-full px-3 py-0.5 hover:border-b" type="button"
+                  x-bind:class="selected == 'background' && 'border-b'" x-on:click="selected = 'background'">
+                  Fundo
+                </button>
+              </li>
+              <li>
+                <button class="w-full px-3 py-0.5 hover:border-b" type="button"
+                  x-bind:class="selected == 'content' && 'border-b'" x-on:click="selected = 'content'">
+                  Conteúdo
+                </button>
+              </li>
+              <li>
+                <button class="w-full px-3 py-0.5 hover:border-b" type="button"
+                  x-bind:class="selected == 'current' && 'border-b'" x-on:click="selected = 'current'">
+                  Atual
+                </button>
+              </li>
+            </ul>
+            <p x-show="error" x-text="error"></p>
+            <div class="flex">
+              <template x-for="base in ['red', 'amber', 'green', 'teal', 'sky', 'indigo', 'purple', 'pink', 'slate']">
+                <div>
+                  <button type="button" x-bind:class="`bg-${color}`" x-data="{ color: 'white' }" x-on:click="() => {
+                      if(Object.values(theme).includes(color)) {
+                          error = 'Esta cor já está sendo utilizada.';
+                          return;
+                      }
+                      error = '';
+                      theme[selected] = color;
+                  }" class="m-1 size-6 rounded-full"></button>
+                  <template x-for="variant in [200, 300, 400, 500, 600, 700, 800, 900]">
+                    <button type="button" x-bind:class="`bg-${color}`" x-data="{ color: `${base}-${variant}` }"
+                      x-on:click="() => {
+                          if(Object.values(theme).includes(color)) {
+                              error = 'Esta cor já está sendo utilizada.';
+                              return;
+                          }
+                          error = '';
+                          theme[selected] = color;
+                      }" class="m-1 size-6 rounded-full"></button>
+                  </template>
+                </div>
+              </template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="fixed right-3 mt-0.5 flex items-center gap-1" type="button" x-on:click="current = 1"
+      x-show="current != 1">
+      Reiniciar
+      <svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor">
+        <path
+          d="M 16 3 C 12 3 8.4 4.7992187 6 7.6992188 L 6 4 L 4 4 L 4 12 L 12 12 L 12 10 L 6.8007812 10 C 8.8007812 7 12.1 5 16 5 C 22.1 5 27 9.9 27 16 C 27 22.1 22.1 27 16 27 C 9.9 27 5 22.1 5 16 L 3 16 C 3 23.2 8.8 29 16 29 C 23.2 29 29 23.2 29 16 C 29 8.8 23.2 3 16 3 z" />
+      </svg>
+    </button>
+  </div>
+
+  <div class="flex justify-center">
+    <div class="w-17 flex h-dvh items-center justify-center">
+      <button type="button" x-on:click="previous()" class="fixed">
+        <svg class="size-12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor">
+          <path
+            d="M 19.75 2.59375 L 19.03125 3.28125 L 7.03125 15.28125 L 6.34375 16 L 7.03125 16.71875 L 19.03125 28.71875 L 19.75 29.40625 L 20.46875 28.71875 L 24.0625 25.09375 L 24.75 24.40625 L 24.0625 23.6875 L 16.375 16 L 24.0625 8.3125 L 24.75 7.59375 L 24.0625 6.90625 L 20.46875 3.28125 Z M 19.75 5.4375 L 21.9375 7.625 L 14.25 15.28125 L 13.53125 16 L 14.25 16.71875 L 21.9375 24.375 L 19.75 26.5625 L 9.1875 16 Z" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="flex flex-col items-center gap-2 mb-3 mt-12">
+      <div x-data="{ index: ++count, active: false }" x-effect.current="active = current == index"
+        x-effect.active="active && $el.scrollIntoView({ block: 'center' })" x-show="beads >= index" class="size-24">
+        <svg x-show="!active" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor">
+          <path
+            d="M 13 3 L 13 9 L 7 9 L 7 15 L 13 15 L 13 29 L 19 29 L 19 15 L 25 15 L 25 9 L 19 9 L 19 3 Z M 15 5 L 17 5 L 17 11 L 23 11 L 23 13 L 17 13 L 17 27 L 15 27 L 15 13 L 9 13 L 9 11 L 15 11 Z" />
+        </svg>
+        <svg x-bind:class="`text-${theme.current} drop-shadow-md/20`" x-show="active" xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 32 32" fill="currentColor">
+          <path
+            d="M 13 3 L 13 9 L 7 9 L 7 15 L 13 15 L 13 29 L 19 29 L 19 15 L 25 15 L 25 9 L 19 9 L 19 3 Z M 15 5 L 17 5 L 17 11 L 23 11 L 23 13 L 17 13 L 17 27 L 15 27 L 15 13 L 9 13 L 9 11 L 15 11 Z" />
+        </svg>
+      </div>
+
+      <div x-data="{ index: ++count, active: false }" x-effect.current="active = current == index"
+        x-effect.active="active && $el.scrollIntoView({ block: 'center' })" x-show="beads >= index" class="size-12">
+        <svg x-show="!active" fill="currentColor" xmlns="http://www.w3.org/2000/svg" id="mdi-record-circle-outline"
+          viewBox="0 0 24 24">
+          <path
+            d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z" />
+        </svg>
+        <svg x-bind:class="`text-${theme.current} drop-shadow-md/20`" x-show="active" fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg" id="mdi-record-circle" viewBox="0 0 24 24">
+          <path
+            d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z" />
+        </svg>
+      </div>
+
+      <template x-for="n in Array.from({ length: 3 })">
+        <div x-data="{ index: ++count, active: false }" x-effect.current="active = current == index"
+          x-effect.active="active && $el.scrollIntoView({ block: 'center' })" x-show="beads >= index" class="size-9">
+          <svg x-show="!active" fill="currentColor" xmlns="http://www.w3.org/2000/svg" id="mdi-circle-outline"
+            viewBox="0 0 24 24">
+            <path
+              d="M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+          </svg>
+          <svg x-bind:class="`text-${theme.current} drop-shadow-md/20`" x-show="active" fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg" id="mdi-circle" viewBox="0 0 24 24">
+            <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+          </svg>
+        </div>
+      </template>
+
+      <template x-for="i in Array.from({ length: 20 })">
+        <div class="flex flex-col items-center gap-2">
+          <div x-data="{ index: ++count, active: false }" x-effect.current="active = current == index"
+            x-effect.active="active && $el.scrollIntoView({ block: 'center' })" x-show="beads >= index" class="size-12">
+            <svg x-show="!active" fill="currentColor" xmlns="http://www.w3.org/2000/svg" id="mdi-record-circle-outline"
+              viewBox="0 0 24 24">
+              <path
+                d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z" />
+            </svg>
+            <svg x-bind:class="`text-${theme.current} drop-shadow-md/20`" x-show="active" fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg" id="mdi-record-circle" viewBox="0 0 24 24">
+              <path
+                d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z" />
+            </svg>
+          </div>
+          <template x-for="n in Array.from({ length: 10 })">
+            <div x-data="{ index: ++count, active: false }" x-effect.current="active = current == index"
+              x-effect.active="active && $el.scrollIntoView({ block: 'center' })" x-show="beads >= index"
+              class="size-9">
+              <svg x-show="!active" fill="currentColor" xmlns="http://www.w3.org/2000/svg" id="mdi-circle-outline"
+                viewBox="0 0 24 24">
+                <path
+                  d="M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+              </svg>
+              <svg x-bind:class="`text-${theme.current} drop-shadow-md/20`" x-show="active" fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg" id="mdi-circle" viewBox="0 0 24 24">
+                <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+              </svg>
+            </div>
+          </template>
+        </div>
+      </template>
+    </div>
+
+    <div class="w-17 flex h-dvh items-center justify-center">
+      <button type="button" x-on:click="next()" class="fixed">
+        <svg class="size-12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor">
+          <path
+            d="M 12.25 2.59375 L 11.53125 3.28125 L 7.9375 6.90625 L 7.25 7.59375 L 7.9375 8.3125 L 15.625 16 L 7.9375 23.6875 L 7.25 24.40625 L 7.9375 25.09375 L 11.53125 28.71875 L 12.25 29.40625 L 12.96875 28.71875 L 24.96875 16.71875 L 25.65625 16 L 24.96875 15.28125 L 12.96875 3.28125 Z M 12.25 5.4375 L 22.8125 16 L 12.25 26.5625 L 10.0625 24.375 L 17.75 16.71875 L 18.46875 16 L 17.75 15.28125 L 10.0625 7.625 Z" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="flex justify-end px-5 py-2">
+    <a class="underline" href="https://www.linkedin.com/in/gabriel2m" rel="noopener noreferrer" target="_blank">
+      @gabriel2m
+    </a>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>

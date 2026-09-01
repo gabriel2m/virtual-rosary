@@ -1,2 +1,0 @@
-./vendor/bin/sail npx lint-staged
-./vendor/bin/sail npm run build

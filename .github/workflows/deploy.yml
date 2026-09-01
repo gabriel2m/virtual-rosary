@@ -1,39 +1,51 @@
-name: Deploy Application
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
 
 on:
-  workflow_dispatch:
+  # Runs on pushes targeting the default branch
   push:
-    branches:
-      - master
+    branches: ['master']
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets the GITHUB_TOKEN permissions to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
 
 jobs:
+  # Single deploy job since we're just deploying
   deploy:
-    name: Deploy via SSH
-    runs-on: ubuntu-latest
     environment:
-      name: prod
-      url: https://tercovirtual.gabriel2m.com
-
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Deploy Application
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SSH_PORT: ${{ secrets.SSH_PORT }}
-          SSH_USER: ${{ secrets.SSH_USER }}
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          APP_PATH: ${{ secrets.APP_PATH }}
-        run: |
-          echo "$SSH_PRIVATE_KEY" > SSH_PRIVATE_KEY
-          chmod 600 SSH_PRIVATE_KEY
-
-          ssh -o StrictHostKeyChecking=no -i SSH_PRIVATE_KEY -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" << EOF
-            cd "$APP_PATH"
-            git pull
-            php composer install --no-dev --optimize-autoloader
-            php artisan optimize
-          EOF
-
-          rm -f SSH_PRIVATE_KEY
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Set up Node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: lts/*
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Setup Pages
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
+        with:
+          # Upload dist folder
+          path: './dist'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5
