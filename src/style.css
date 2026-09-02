@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 
 @source inline("{bg,text}-{red,amber,green,teal,sky,indigo,purple,pink,slate}-{200..900..100}");
+@source inline("border-{red,amber,green,teal,sky,indigo,purple,pink,slate}-{200..900..100}/30");
 @source inline("bg-white");
 @source inline("text-white");
 

@@ -71,7 +71,9 @@
     previous() {
         this.current = Math.max(1, this.current - 1);
     }
-}" x-init="template = get('template', templates[0]); theme.current && (theme.progress = theme.current) && delete theme.current" x-effect.template="set('template', template); setTemplate(template)"
+}"
+  x-init="template = get('template', templates[0]); theme.current && (theme.progress = theme.current) && delete theme.current"
+  x-effect.template="set('template', template); setTemplate(template)"
   x-effect.current="set('current', current == total ? 1 : current)" x-effect.theme="set('theme', theme)"
   x-on:keydown.arrow-down.prevent="next()" x-on:keydown.arrow-left="previous()" x-on:keydown.arrow-right="next()"
   x-on:keydown.arrow-up.prevent="previous()" class="text-sm font-medium">
@@ -143,24 +145,30 @@
     </div>
     <div x-data="{ open: false }" class="flex justify-center z-10 col-span-2">
       <button type="button" @click="open = !open" @click.away="open = false" @keydown.escape="open = false"
-        class="flex">
+        class="flex z-20" x-bind:class="open ? 'fixed' : 'relative' ">
         <span x-text="template.name"></span>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 ml-1 -mt-px">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+          class="size-5 ml-1 -mt-px absolute -right-6">
           <path fill-rule="evenodd"
             d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
-            clip-rule="evenodd" />
+            clip-rule="evenodd" x-show="!open" />
+          <path fill-rule="evenodd"
+            d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5Z"
+            clip-rule="evenodd" x-show="open" />
         </svg>
       </button>
-
-      <ul x-show="open" class="absolute mt-5 px-2 py-1 border border-black/20 shadow rounded flex flex-col items-center"
+      <div x-show="open" class="fixed top-0 flex flex-col items-center h-dvh w-dvw pt-9"
         x-bind:class="`bg-${theme.background} text-${theme.content}`">
-        <template x-for="option in templates">
-          <li @click="open = false; template = option; current = 1" x-show="template.id !== option.id"
-            class="relative py-1 cursor-pointer hover:underline">
-            <span x-text="option.name"></span>
-          </li>
-        </template>
-      </ul>
+        <ul class="text-center">
+          <template x-for="option in templates">
+            <li @click="open = false; template = option; current = 1" x-show="template.id !== option.id"
+              class="p-2 cursor-pointer hover:underline border-t w-full"
+              x-bind:class="`border-${theme.content}/30`">
+              <span x-text="option.name"></span>
+            </li>
+          </template>
+        </ul>
+      </div>
     </div>
   </div>
   <button class="fixed right-3 mt-3 flex items-center gap-1" type="button" x-on:click="current = 1"
