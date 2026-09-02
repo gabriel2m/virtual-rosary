@@ -76,7 +76,7 @@
   x-on:keydown.arrow-down.prevent="next()" x-on:keydown.arrow-left="previous()" x-on:keydown.arrow-right="next()"
   x-on:keydown.arrow-up.prevent="previous()" class="text-sm font-medium">
 
-  <div class="absolute grid grid-cols-3 w-full p-3">
+  <div class="absolute grid grid-cols-4 w-full p-3">
     <div x-data="{ open: false }">
       <button class="flex" type="button" x-on:click="open = !open">
         Tema
@@ -141,7 +141,7 @@
         </div>
       </div>
     </div>
-    <div x-data="{ open: false }" class="flex justify-center z-10">
+    <div x-data="{ open: false }" class="flex justify-center z-10 col-span-2">
       <button type="button" @click="open = !open" @click.away="open = false" @keydown.escape="open = false"
         class="flex">
         <span x-text="template.name"></span>
