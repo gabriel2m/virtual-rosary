@@ -71,7 +71,7 @@
     previous() {
         this.current = Math.max(1, this.current - 1);
     }
-}" x-init="template = get('template', templates[0])" x-effect.template="set('template', template); setTemplate(template)"
+}" x-init="template = get('template', templates[0]); theme.current && (theme.progress = theme.current) && delete theme.current" x-effect.template="set('template', template); setTemplate(template)"
   x-effect.current="set('current', current == total ? 1 : current)" x-effect.theme="set('theme', theme)"
   x-on:keydown.arrow-down.prevent="next()" x-on:keydown.arrow-left="previous()" x-on:keydown.arrow-right="next()"
   x-on:keydown.arrow-up.prevent="previous()" class="text-sm font-medium">
